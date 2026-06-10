@@ -95,16 +95,18 @@ export function useLiveAPI(options: LiveClientOptions): UseLiveAPIResults {
     };
   }, [client]);
 
-  const connect = useCallback(async () => {
-    if (!config) {
-      throw new Error("config has not been set");
-    }
-    client.disconnect();
-    await client.connect(
-  "models/gemini-2.5-flash-native-audio-preview-12-2025",
-  config
-);
-  }, [client, config, model]);
+const connect = useCallback(async () => {
+  if (!config) {
+    throw new Error("config has not been set");
+  }
+
+  client.disconnect();
+
+  await client.connect(
+    "models/gemini-2.5-flash-native-audio-preview-12-2025",
+    config
+  );
+}, [client, config]);
 
   const disconnect = useCallback(async () => {
     client.disconnect();
